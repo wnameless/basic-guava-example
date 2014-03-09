@@ -7,6 +7,7 @@ import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -40,6 +41,12 @@ public class GuavaExample implements Comparable<GuavaExample> {
     Set<String> set2 = newHashSet();
     Map<Integer, String> map2 = newHashMap();
     // Don't need to retype the generic anymore
+
+    // Without Guava
+    List<Integer> ints = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
+
+    // With Guava
+    ints = newArrayList(1, 2, 3);
   }
 
   @SuppressWarnings("unused")
