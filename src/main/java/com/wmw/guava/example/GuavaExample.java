@@ -165,8 +165,8 @@ public class GuavaExample implements Comparable<GuavaExample> {
 
             }));
     // Using function idioms with Iterables.filter & transform is much more
-    // efficiency, because all Iterables are lazy.
-    // No intermediate collections are need.
+    // efficiency, because all Iterables are lazy. No intermediate collections
+    // are needed.
     // BTW, function idioms are the key for you to master the upcoming Java 8.
   }
 
