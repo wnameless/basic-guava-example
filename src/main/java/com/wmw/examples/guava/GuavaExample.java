@@ -26,6 +26,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -44,10 +45,17 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
-public class GuavaExample implements Comparable<GuavaExample> {
+public class GuavaExample implements Comparable<GuavaExample>, Serializable {
 
-  Integer i;
-  Double d;
+  private static final long serialVersionUID = 1L;
+
+  private final Integer i;
+  private final Double d;
+
+  public GuavaExample(Integer i, Double d) {
+    this.i = checkNotNull(i);
+    this.d = checkNotNull(d);
+  }
 
   @SuppressWarnings("unused")
   public void staticFactoryMethodsOfCollections() {
