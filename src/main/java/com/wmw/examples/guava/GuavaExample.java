@@ -35,14 +35,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.base.Function;
 import com.google.common.base.Objects;
-import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
 public class GuavaExample implements Comparable<GuavaExample>, Serializable {
@@ -71,10 +68,10 @@ public class GuavaExample implements Comparable<GuavaExample>, Serializable {
     // Don't need to retype the generic anymore
 
     // Without Guava
-    List<Integer> ints = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
+    List<Integer> ints1 = new ArrayList<Integer>(Arrays.asList(1, 2, 3));
 
     // With Guava
-    ints = newArrayList(1, 2, 3);
+    List<Integer> ints2 = newArrayList(1, 2, 3);
   }
 
   @SuppressWarnings("unused")
@@ -168,41 +165,29 @@ public class GuavaExample implements Comparable<GuavaExample>, Serializable {
     return ComparisonChain.start().compare(i, o.i).compare(d, o.d).result();
   }
 
-  public void functionIdiomUsedToManipulateCollections() {
-    List<String> strs = newArrayList("1", "2", "3", "a", "b", "c");
-    // Without Guava
-    List<String> strInts = new ArrayList<String>();
-    for (String str : strs) {
-      if (str.matches("\\d+"))
-        strInts.add(str);
-    }
-    List<Integer> evenNums = new ArrayList<Integer>();
-    for (String strInt : strInts) {
-      evenNums.add(Integer.valueOf(strInt));
-    }
-
-    // With Guava
-    evenNums =
-        newArrayList(Iterables.transform(
-            Iterables.filter(strs, new Predicate<String>() {
-
-              @Override
-              public boolean apply(String arg0) {
-                return arg0.matches("\\d+");
-              }
-
-            }), new Function<String, Integer>() {
-
-              @Override
-              public Integer apply(String arg0) {
-                return Integer.valueOf(arg0);
-              }
-
-            }));
-    // Using function idioms with Iterables.filter & transform is much more
-    // efficiency, because all Iterables are lazy. No intermediate collections
-    // are needed.
-    // BTW, function idioms are the key for you to master the upcoming Java 8.
-  }
+  /*
+   * public void functionIdiomUsedToManipulateCollections() { List<String> strs
+   * = newArrayList("1", "2", "3", "a", "b", "c"); // Without Guava List<String>
+   * strInts = new ArrayList<String>(); for (String str : strs) { if
+   * (str.matches("\\d+")) strInts.add(str); } List<Integer> evenNums = new
+   * ArrayList<Integer>(); for (String strInt : strInts) {
+   * evenNums.add(Integer.valueOf(strInt)); }
+   * 
+   * // With Guava evenNums = newArrayList(Iterables.transform(
+   * Iterables.filter(strs, new Predicate<String>() {
+   * 
+   * @Override public boolean apply(String arg0) { return arg0.matches("\\d+");
+   * }
+   * 
+   * }), new Function<String, Integer>() {
+   * 
+   * @Override public Integer apply(String arg0) { return Integer.valueOf(arg0);
+   * }
+   * 
+   * })); // Using function idioms with Iterables.filter & transform is much
+   * more // efficiency, because all Iterables are lazy. No intermediate
+   * collections // are needed. // BTW, function idioms are the key for you to
+   * master the upcoming Java 8. }
+   */
 
 }
